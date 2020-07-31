@@ -1,1 +1,1 @@
-token = "my-apikey-token"
+token = ""
