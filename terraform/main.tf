@@ -4,41 +4,16 @@ provider "linode" {
   token   = var.token
 }
 
-//Use the linode_lke_cluster resource to create
-//a Kubernetes cluster
-resource "linode_lke_cluster" "tuxlabs" {
-  k8s_version = var.k8s_version
-  label       = var.label
-  region      = var.region
-  tags        = var.tags
-
-  dynamic "pool" {
-    for_each = var.pools
-    content {
-      type  = pool.value["type"]
-      count = pool.value["count"]
-    }
-  }
+resource "linode_domain" "tuxlabs-domain" {
+  type      = "master"
+  domain    = "tuxlabs.io"
+  soa_email = "jp@tuxlabs.io"
+  tags      = ["tuxlabs", "labs"]
 }
 
-//Export this cluster's attributes
-output "kubeconfig" {
-  value     = linode_lke_cluster.tuxlabs.kubeconfig
-  sensitive = true
-}
-
-output "api_endpoints" {
-  value = linode_lke_cluster.tuxlabs.api_endpoints
-}
-
-output "status" {
-  value = linode_lke_cluster.tuxlabs.status
-}
-
-output "id" {
-  value = linode_lke_cluster.tuxlabs.id
-}
-
-output "pool" {
-  value = linode_lke_cluster.tuxlabs.pool
-}
+# resource "linode_domain_record" "tuxlabs-record" {
+#   domain_id   = "${linode_domain.tuxlabs-domain.id}"
+#   name        = "www"
+#   record_type = "CNAME"
+#   target      = "foobar.example"
+# }
