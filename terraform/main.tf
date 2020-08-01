@@ -15,5 +15,5 @@ resource "cloudflare_record" "www" {
   name    = "www"
   value   = "192.168.0.11"
   type    = "A"
-  ttl     = 3600
+  ttl     = 1
 }
