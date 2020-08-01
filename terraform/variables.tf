@@ -36,3 +36,16 @@ variable "pools" {
     }
   ]
 }
+
+variable "cloudflare_email" {
+  description = "The email associated with the account. (required)"
+  default     = "jose.bovet@gmail.com"
+}
+
+variable "cloudflare_api_key" {
+  description = "The Cloudflare API key. (required)"
+}
+
+variable "cloudflare_zone_id" {
+  description = "The DNS zone ID to add the record to. (required)"
+}
