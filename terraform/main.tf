@@ -66,6 +66,8 @@ resource "linode_nodebalancer_config" "tuxlabs_lb_config" {
 #   weight          = 50
 # }
 
+data "linode_instances" "all-instances" {}
+
 data "linode_instances" "tuxlabs" {
   filter {
     name = "id"
