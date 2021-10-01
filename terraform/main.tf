@@ -1,11 +1,11 @@
 //Use the Linode Provider
 provider "linode" {
-  version = "~> 1.12.4"
+  version = "~> 1.21.0"
   token   = var.token
 }
 
 provider "cloudflare" {
-  version = "~> 2.0"
+  version = "~> 3.1.0"
   email   = var.cloudflare_email
   api_key = var.cloudflare_api_key
 }
