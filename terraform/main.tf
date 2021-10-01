@@ -1,11 +1,21 @@
 //Use the Linode Provider
+terraform {
+  required_providers {
+    cloudflare = {
+      source = "cloudflare/cloudflare"
+      version = "3.1.0"
+    }
+    linode = {
+      source = "linode/linode"
+      version = "1.21.0"
+    }
+  }
+}
 provider "linode" {
-  version = "1.21.0"
   token   = var.token
 }
 
 provider "cloudflare" {
-  version = "3.1.0"
   email   = var.cloudflare_email
   api_key = var.cloudflare_api_key
 }
