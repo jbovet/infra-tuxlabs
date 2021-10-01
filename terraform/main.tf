@@ -41,7 +41,7 @@ resource "linode_nodebalancer" "tuxlabs_lb" {
   label                = var.label
   region               = var.region
   tags                 = var.tags
-  client_conn_throttle = 20
+  client_conn_throttle = var.conn_throttle
 }
 
 resource "linode_nodebalancer_config" "tuxlabs_lb_config" {
@@ -52,6 +52,7 @@ resource "linode_nodebalancer_config" "tuxlabs_lb_config" {
   check_path      = "/ping"
   check_attempts  = 3
   check_timeout   = 5
+  check_interval  = 30
   algorithm       = "source"
 }
 

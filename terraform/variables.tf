@@ -22,6 +22,12 @@ variable "tags" {
   type        = list(string)
   default     = ["tuxlabs", "labs", "k8s"]
 }
+variable "conn_throttle" {
+  description = "Throttle connections per second (0-20). Set to 0 (default) to disable throttling (optional)"
+  default     = "20"
+}
+
+
 
 variable "pools" {
   description = "The Node Pool specifications for the Kubernetes cluster. (required)"
