@@ -56,14 +56,21 @@ resource "linode_nodebalancer_config" "tuxlabs_lb_config" {
   algorithm       = "source"
 }
 
-resource "linode_nodebalancer_node" "tuxlabs_lb_node" {
-  # count           = "2"
-  nodebalancer_id = linode_nodebalancer.tuxlabs_lb.id
-  config_id       = linode_nodebalancer_config.tuxlabs_lb_config.id
-  # address         = "${element(linode_lke_cluster.tuxlabs.pool.*.nodes.private_ip_address, count.index)}:80"
-  address         = "lke38897-63033-615792fe23a8"
-  label           = var.label
-  weight          = 50
+# resource "linode_nodebalancer_node" "tuxlabs_lb_node" {
+#   # count           = "2"
+#   nodebalancer_id = linode_nodebalancer.tuxlabs_lb.id
+#   config_id       = linode_nodebalancer_config.tuxlabs_lb_config.id
+#   # address         = "${element(linode_lke_cluster.tuxlabs.pool.*.nodes.private_ip_address, count.index)}:80"
+#   address         = "lke38897-63033-615792fe23a8"
+#   label           = var.label
+#   weight          = 50
+# }
+
+data "linode_instances" "tuxlabs" {
+  filter {
+    name = "label"
+    values = ["tuxlabs"]
+  }
 }
 
 //DNS
