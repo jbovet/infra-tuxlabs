@@ -67,12 +67,12 @@ resource "linode_nodebalancer_config" "tuxlabs_lb_config" {
 # }
 
 
-data "linode_instances" "tuxlabs" {
-  filter {
-    name = "id"
-    values = [linode_lke_cluster.tuxlabs.id]
-  }
-}
+# data "linode_instances" "tuxlabs" {
+#   filter {
+#     name = "id"
+#     values = [linode_lke_cluster.tuxlabs.id]
+#   }
+# }
 
 
 ## Data Sources
