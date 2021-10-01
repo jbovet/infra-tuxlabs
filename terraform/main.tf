@@ -47,7 +47,7 @@ resource "linode_nodebalancer" "tuxlabs_lb" {
 resource "linode_nodebalancer_config" "tuxlabs_lb_config" {
   nodebalancer_id = linode_nodebalancer.tuxlabs_lb.id
   port            = 443
-  protocol        = "https"
+  protocol        = "http"
   check           = "http"
   check_path      = "/ping"
   check_attempts  = 3
@@ -66,13 +66,13 @@ resource "linode_nodebalancer_config" "tuxlabs_lb_config" {
 # }
 
 //DNS
-resource "cloudflare_record" "www" {
-  zone_id = var.cloudflare_zone_id
-  name    = "www"
-  value   = linode_nodebalancer.tuxlabs_lb.ipv4
-  type    = "A"
-  ttl     = 1
-}
+# resource "cloudflare_record" "www" {
+#   zone_id = var.cloudflare_zone_id
+#   name    = "www"
+#   value   = linode_nodebalancer.tuxlabs_lb.ipv4
+#   type    = "A"
+#   ttl     = 1
+# }
 
 //Export this cluster's attributes
 output "kubeconfig" {
