@@ -66,13 +66,30 @@ resource "linode_nodebalancer_config" "tuxlabs_lb_config" {
 #   weight          = 50
 # }
 
-data "linode_instances" "all-instances" {}
 
 data "linode_instances" "tuxlabs" {
   filter {
     name = "id"
     values = [linode_lke_cluster.tuxlabs.id]
   }
+}
+
+
+## Data Sources
+data "linode_instances" "tuxlabs" {
+  filter {
+    name   = "id"
+    values = local.lke_node_ids
+  }
+}
+
+locals {
+  lke_node_ids = flatten(
+    [for pool in linode_lke_cluster.tuxlabs.pool :
+      [for node in pool.nodes : node.instance_id]
+    ]
+  )
+  lke_node_ip = data.linode_instances.tuxlabs.instances[0].private_ip_address
 }
 
 //DNS
