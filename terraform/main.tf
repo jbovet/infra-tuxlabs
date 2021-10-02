@@ -60,19 +60,10 @@ resource "linode_nodebalancer_node" "tuxlabs_lb_node" {
   count           = "2"
   nodebalancer_id = linode_nodebalancer.tuxlabs_lb.id
   config_id       = linode_nodebalancer_config.tuxlabs_lb_config.id
-  address         = "${element(local.lke_node_ips, count.index)}"
+  address         = "${element(local.lke_node_ips, count.index)}:80"
   label           = var.label
   weight          = 50
 }
-
-
-# data "linode_instances" "tuxlabs" {
-#   filter {
-#     name = "id"
-#     values = [linode_lke_cluster.tuxlabs.id]
-#   }
-# }
-
 
 ## Data Sources
 data "linode_instances" "tuxlabs" {
