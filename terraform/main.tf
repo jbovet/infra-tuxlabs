@@ -93,23 +93,23 @@ provider "cloudflare" {
 # }
 
 //Export this cluster's attributes
-output "kubeconfig" {
-  value     = linode_lke_cluster.tuxlabs.kubeconfig
-  sensitive = true
-}
+# output "kubeconfig" {
+#   value     = linode_lke_cluster.tuxlabs.kubeconfig
+#   sensitive = true
+# }
 
-output "api_endpoints" {
-  value = linode_lke_cluster.tuxlabs.api_endpoints
-}
+# output "api_endpoints" {
+#   value = linode_lke_cluster.tuxlabs.api_endpoints
+# }
 
-output "status" {
-  value = linode_lke_cluster.tuxlabs.status
-}
+# output "status" {
+#   value = linode_lke_cluster.tuxlabs.status
+# }
 
-output "id" {
-  value = linode_lke_cluster.tuxlabs.id
-}
+# output "id" {
+#   value = linode_lke_cluster.tuxlabs.id
+# }
 
-output "pool" {
-  value = linode_lke_cluster.tuxlabs.pool
-}
+# output "pool" {
+#   value = linode_lke_cluster.tuxlabs.pool
+# }
