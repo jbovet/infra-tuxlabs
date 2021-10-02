@@ -57,10 +57,10 @@ resource "linode_nodebalancer_config" "tuxlabs_lb_config" {
 }
 
 resource "linode_nodebalancer_node" "tuxlabs_lb_node" {
-  # count           = "2"
+  count           = "2"
   nodebalancer_id = linode_nodebalancer.tuxlabs_lb.id
   config_id       = linode_nodebalancer_config.tuxlabs_lb_config.id
-  address         = "${local.lke_node_ips}"
+  address         = "${element(local.lke_node_ips, count.index)}"
   label           = var.label
   weight          = 50
 }
