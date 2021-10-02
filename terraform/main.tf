@@ -89,7 +89,7 @@ locals {
     ]
   )
   lke_node_ip   = data.linode_instances.tuxlabs.instances[0].private_ip_address
-  lke_node_ips  = data.linode_instances.tuxlabs.instances.private_ip_address
+  lke_node_ips  = data.linode_instances.tuxlabs.instances.*.private_ip_address
 }
 
 //DNS
