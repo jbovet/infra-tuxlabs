@@ -1,18 +1,17 @@
-//Use the Linode Provider
 terraform {
   required_providers {
     cloudflare = {
-      source = "cloudflare/cloudflare"
+      source  = "cloudflare/cloudflare"
       version = "3.1.0"
     }
     linode = {
-      source = "linode/linode"
+      source  = "linode/linode"
       version = "1.21.0"
     }
   }
 }
 provider "linode" {
-  token   = var.token
+  token = var.token
 }
 
 provider "cloudflare" {
@@ -20,8 +19,6 @@ provider "cloudflare" {
   api_key = var.cloudflare_api_key
 }
 
-//Use the linode_lke_cluster resource to create
-//a Kubernetes cluster
 resource "linode_lke_cluster" "tuxlabs" {
   k8s_version = var.k8s_version
   label       = var.label
@@ -65,7 +62,7 @@ resource "linode_nodebalancer_node" "tuxlabs_lb_node" {
   weight          = 50
 }
 
-# ## Data Sources
+### Data Sources
 data "linode_instances" "tuxlabs" {
   filter {
     name   = "id"
@@ -79,18 +76,8 @@ locals {
       [for node in pool.nodes : node.instance_id]
     ]
   )
-  lke_node_ip   = data.linode_instances.tuxlabs.instances[0].private_ip_address
-  lke_node_ips  = data.linode_instances.tuxlabs.instances.*.private_ip_address
+  lke_node_ips = data.linode_instances.tuxlabs.instances.*.private_ip_address
 }
-
-//DNS
-# resource "cloudflare_record" "www" {
-#   zone_id = var.cloudflare_zone_id
-#   name    = "www"
-#   value   = linode_nodebalancer.tuxlabs_lb.ipv4
-#   type    = "A"
-#   ttl     = 1
-# }
 
 //Export this cluster's attributes
 output "kubeconfig" {
