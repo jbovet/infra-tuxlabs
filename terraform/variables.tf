@@ -2,6 +2,11 @@ variable "token" {
   description = "Your Linode API Access Token (required)"
 }
 
+variable "nodes_count" {
+  description = "Worker nodes count(required)"
+  default     = "2"
+}
+
 variable "k8s_version" {
   description = "The Kubernetes version to use for this cluster. (required)"
   default     = "1.21"

@@ -54,7 +54,7 @@ resource "linode_nodebalancer_config" "tuxlabs_lb_config" {
 }
 
 resource "linode_nodebalancer_node" "tuxlabs_lb_node" {
-  count           = "2"
+  count           = var.nodes_count
   nodebalancer_id = linode_nodebalancer.tuxlabs_lb.id
   config_id       = linode_nodebalancer_config.tuxlabs_lb_config.id
   address         = "${element(local.lke_node_ips, count.index)}:80"
