@@ -4,7 +4,7 @@ variable "token" {
 
 variable "nodes_count" {
   description = "Worker nodes count(required)"
-  default     = "2"
+  default     = "3"
 }
 
 variable "k8s_version" {
@@ -43,7 +43,7 @@ variable "pools" {
   default = [
     {
       type  = "g6-standard-1"
-      count = 2
+      count = 3
     }
   ]
 }
