@@ -9,7 +9,7 @@ variable "nodes_count" {
 
 variable "k8s_version" {
   description = "The Kubernetes version to use for this cluster. (required)"
-  default     = "1.21"
+  default     = "1.23"
 }
 
 variable "label" {
